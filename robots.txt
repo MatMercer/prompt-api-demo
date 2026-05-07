@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://matmercer.github.io/prompt-api-demo/sitemap.xml

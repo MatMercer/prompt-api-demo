@@ -3,7 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Prompt API — Draw & Describe</title>
+<title>Chrome Prompt API Demo — Draw & Describe with Gemini Nano (On-Device AI)</title>
+<meta name="description" content="Interactive demo of Chrome's built-in Prompt API with multimodal (image) input. Draw on a canvas or upload an image, then have on-device Gemini Nano describe it — no server, no API key. Requires Chrome 148+.">
+<meta name="keywords" content="Chrome Prompt API, Gemini Nano, on-device AI, built-in AI, LanguageModel API, multimodal, image input, Chrome 148, window.LanguageModel, browser AI demo, client-side AI, WebAI, Chrome AI flags, Prompt API example">
+<meta name="author" content="Mateus Mercer">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://matmercer.github.io/prompt-api-demo/">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://matmercer.github.io/prompt-api-demo/">
+<meta property="og:title" content="Chrome Prompt API Demo — Draw & Describe with Gemini Nano">
+<meta property="og:description" content="Draw on a canvas or upload an image; let Chrome's on-device Gemini Nano describe it via the built-in Prompt API. Streaming, JSON Schema, system prompts — all client-side.">
+<meta property="og:image" content="https://matmercer.github.io/prompt-api-demo/example1.png">
+<meta property="og:site_name" content="Chrome Prompt API Demo">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chrome Prompt API Demo — Draw & Describe with Gemini Nano">
+<meta name="twitter:description" content="Interactive playground for Chrome's built-in multimodal Prompt API. Draw, upload, or pick an example — Gemini Nano describes it on-device. Chrome 148+.">
+<meta name="twitter:image" content="https://matmercer.github.io/prompt-api-demo/example1.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Chrome Prompt API Demo — Draw & Describe",
+  "url": "https://matmercer.github.io/prompt-api-demo/",
+  "description": "Interactive single-page demo of Chrome's built-in Prompt API with multimodal image input. Uses on-device Gemini Nano via window.LanguageModel — no server, no API key. Exposes system prompt, temperature, topK, streaming, and JSON Schema response constraints.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Chrome 148+ (desktop)",
+  "browserRequirements": "Requires Chrome 148 or later with the Prompt API for Gemini Nano (multimodal input) flag enabled.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Person", "name": "Mateus Mercer", "url": "https://github.com/MatMercer" },
+  "keywords": "Chrome Prompt API, Gemini Nano, on-device AI, LanguageModel API, multimodal, image input, built-in AI, browser AI"
+}
+</script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
 <style>
