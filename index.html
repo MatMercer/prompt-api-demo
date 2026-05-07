@@ -58,6 +58,17 @@
     align-items: stretch;
   }
   h1 { font-size: 1.2rem; margin: 0 0 0.5rem; text-align: center; }
+  .callout {
+    font-size: 0.85rem;
+    color: #0c4a6e;
+    background: #e0f2fe;
+    border: 1px solid #7dd3fc;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    margin: 0 0 0.75rem;
+    text-align: center;
+  }
+  .callout a { color: #0369a1; font-weight: 600; }
   .disclaimer {
     font-size: 0.8rem;
     color: #663c00;
@@ -252,6 +263,7 @@
   <div class="container">
     <h1>Draw something, then ask the model to describe it</h1>
     <div class="disclaimer">Requires <strong>Chrome 148+</strong> with the on-device Prompt API enabled (multimodal input). Desktop only, ~22 GB free disk, GPU with &gt;4 GB VRAM.</div>
+    <div class="callout">ℹ️ If you want to check it out without running it, <a href="https://www.youtube.com/shorts/xOee9p-N4zw" target="_blank" rel="noopener">watch this video</a>.</div>
 
     <div class="canvas-wrap">
       <canvas id="canvas" width="900" height="600"></canvas>
