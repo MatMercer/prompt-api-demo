@@ -24,7 +24,17 @@
     flex-direction: column;
     align-items: stretch;
   }
-  h1 { font-size: 1.2rem; margin: 0 0 1rem; text-align: center; }
+  h1 { font-size: 1.2rem; margin: 0 0 0.5rem; text-align: center; }
+  .disclaimer {
+    font-size: 0.8rem;
+    color: #663c00;
+    background: #fff4d6;
+    border: 1px solid #f1d27a;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    margin: 0 0 0.75rem;
+    text-align: center;
+  }
   .canvas-wrap {
     width: 100%;
     aspect-ratio: 3 / 2;
@@ -208,6 +218,7 @@
 <body>
   <div class="container">
     <h1>Draw something, then ask the model to describe it</h1>
+    <div class="disclaimer">Requires <strong>Chrome 148+</strong> with the on-device Prompt API enabled (multimodal input). Desktop only, ~22 GB free disk, GPU with &gt;4 GB VRAM.</div>
 
     <div class="canvas-wrap">
       <canvas id="canvas" width="900" height="600"></canvas>
@@ -231,6 +242,14 @@
       <button id="clear">Clear</button>
       <button id="upload-btn" type="button">Select image</button>
       <input type="file" id="upload" accept="image/*" style="display:none">
+      <label>Load example
+        <select id="example-select">
+          <option value="">—</option>
+          <option value="example1.png">Example 1</option>
+          <option value="example2.png">Example 2</option>
+          <option value="example3.png">Example 3</option>
+        </select>
+      </label>
       <button id="describe">Describe the image</button>
       <button id="stop" disabled>Stop</button>
       <span class="status" id="status"></span>
@@ -417,6 +436,36 @@ uploadInput.addEventListener('change', () => {
     log('image load failed', { name: file.name });
   };
   img.src = url;
+});
+
+const exampleSelect = document.getElementById('example-select');
+exampleSelect.addEventListener('change', async () => {
+  const file = exampleSelect.value;
+  if (!file) return;
+  try {
+    const resp = await fetch(file);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const blob = await resp.blob();
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const cw = canvas.width, ch = canvas.height;
+      const ratio = Math.min(cw / img.width, ch / img.height);
+      const w = img.width * ratio, h = img.height * ratio;
+      const x = (cw - w) / 2, y = (ch - h) / 2;
+      ctx.drawImage(img, x, y, w, h);
+      URL.revokeObjectURL(url);
+      log('example loaded onto canvas', { file, w: img.width, h: img.height, size: fmtBytes(blob.size) });
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); log('failed to decode example', { file }); };
+    img.src = url;
+  } catch (e) {
+    log('failed to fetch example', { file, error: e.message });
+  } finally {
+    exampleSelect.value = '';
+  }
 });
 
 function fmtBytes(n) {
